@@ -1,11 +1,41 @@
 import './Main.scss';
 import axios from 'axios';
+import {
+    CardMeta,
+    CardHeader,
+    CardDescription,
+    CardContent,
+    Card,
+    Icon,
+    Image,
+    GridRow,
+    GridColumn, 
+    Grid,
+  } from 'semantic-ui-react'
 
 
 function Main(){
     return (
-        <div>
-            <p>main</p>
+        <div className='main'>
+            <div>Art for your heart</div>
+            <Card>
+                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+                <CardContent>
+                <CardHeader>Matthew</CardHeader>
+                <CardMeta>
+                    <span className='date'>Joined in 2015</span>
+                </CardMeta>
+                <CardDescription>
+                    Matthew is a musician living in Nashville.
+                </CardDescription>
+                </CardContent>
+                <CardContent extra>
+                <a>
+                    <Icon name='user' />
+                    22 Friends
+                </a>
+                </CardContent>
+            </Card>
         </div>
     );
 }

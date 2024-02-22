@@ -7,6 +7,8 @@ import Main from './components/Main/Main';
 import Matches from './components/Matches/Matches';
 import Messages from './components/Messages/Messages';
 import Profile from './components/Profile/Profile';
+import Nav from './components/Nav/Nav';
+import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,6 +23,14 @@ function App() {
   return (
     <div className="App">
 <BrowserRouter>
+{
+    (window.location.pathname === '/main' ||
+      window.location.pathname === '/matches' ||
+      window.location.pathname === '/messages' ||
+      window.location.pathname === '/profile') && (
+        <Nav handleLogout={handleLogout} />
+      )
+  }
         <Routes>
           <Route path="/"element={<Login handleLogin={handleLogin} user={user} />}/>
           <Route path="/signup" element={<Signup handleLogin={handleLogin}/>} />
