@@ -8,9 +8,6 @@ import {
     Card,
     Icon,
     Image,
-    GridRow,
-    GridColumn, 
-    Grid,
   } from 'semantic-ui-react'
 
 

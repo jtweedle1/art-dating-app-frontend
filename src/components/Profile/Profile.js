@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function Profile(){
     return (
-        <div>
+        <div className='profile'>
             <p>profile</p>
         </div>
     );

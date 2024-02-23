@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.scss';
 import Login from './components/Login/Login';
@@ -19,7 +19,9 @@ function App() {
 
   const handleLogin=(user)=>{
     setUser(user);
+    return <Navigate to="/main" replace />;
   }
+  
   return (
     <div className="App">
 <BrowserRouter>
@@ -32,7 +34,7 @@ function App() {
       )
   }
         <Routes>
-          <Route path="/"element={<Login handleLogin={handleLogin} user={user} />}/>
+          <Route path="/"element={<Login handleLogin={handleLogin} user={user}  />}/>
           <Route path="/signup" element={<Signup handleLogin={handleLogin}/>} />
           <Route path="/main" element={ <Main />}/>
           <Route path="/matches" element={<Matches />}/>

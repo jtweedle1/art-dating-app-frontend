@@ -9,7 +9,6 @@ import {
     Card,
     Icon,
     Image,
-    GridRow,
     GridColumn, 
     Grid,
   } from 'semantic-ui-react'
@@ -33,7 +32,7 @@ function Matches(){
 }, []);
 
     return (
-        <div>
+        <div className='matches'>
             <p>Matches</p>
             <Grid>
             {matches?
