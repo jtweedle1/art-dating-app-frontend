@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function Messages(){
     return (
-        <div>
+        <div className='messages'>
             <p>messages</p>
         </div>
     );
