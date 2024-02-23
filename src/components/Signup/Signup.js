@@ -2,7 +2,7 @@ import './Signup.scss';
 import axios from 'axios';
 import logo from '../../assets/logo.png'
 import { useNavigate} from 'react-router-dom';
-import { FormField, Button, Checkbox, Form, FormSelect, FormTextArea, FormCheckbox } from 'semantic-ui-react'
+import { FormField, Button, Form, FormSelect, FormTextArea, FormCheckbox } from 'semantic-ui-react'
 
 function Signup(){
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Signup(){
 
         
         axios.post("http://localhost:8080/users", {
-            username: formData.get('name'),
+            name: formData.get('name'),
             username: formData.get('username'),
             password: formData.get('password'),
             art: formData.get('art'),

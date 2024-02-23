@@ -12,6 +12,13 @@ import {
 
 
 function Main(){
+
+
+
+    async function handleLike (){
+        console.log("love is in the air")
+    }
+
     return (
         <div className='main'>
             <div>Art for your heart</div>
@@ -33,6 +40,14 @@ function Main(){
                 </a>
                 </CardContent>
             </Card>
+            <div className='button-container'>
+            <button className='button-dislike'>
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <button className='button-like' onClick={handleLike}>
+                <span class="material-symbols-outlined">favorite</span>
+            </button>
+            </div>
         </div>
     );
 }

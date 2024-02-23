@@ -12,6 +12,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   const [user, setUser] = useState(null);
+  const [matched,setMatched] = useState(null);
 
   const handleLogout = () => {
     setUser(null);
