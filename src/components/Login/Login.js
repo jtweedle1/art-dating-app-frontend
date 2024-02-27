@@ -19,7 +19,7 @@ function Login({handleLogin, user}){
                 let data = response.data;
                 handleLogin(data)
                 navigate('/main');
-                console.log(data)
+                console.log(data.id)
             })
             .catch((error) => {
                 console.log(error);

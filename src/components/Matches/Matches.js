@@ -12,14 +12,21 @@ import {
     GridColumn, 
     Grid,
   } from 'semantic-ui-react'
-  
+//   const { ObjectId } = require('mongodb');
 
 
-function Matches(){
+function Matches({user}){
     const [matches, setMatches] = useState(null)
 
     useEffect(() => {
-    axios.get("http://localhost:8080/users")
+        // const timestamp = user.id.timestamp; // Extract the timestamp from the object
+        // const timestampSeconds = Math.floor(timestamp / 1000); // Convert timestamp to seconds
+        // const objectId = ObjectId.createFromTime(timestampSeconds); // Create ObjectId from timestamp
+        // const objectIdString = objectId.toHexString(); // Convert ObjectId to string
+        const timestamp = user.id.timestamp; // Extract the timestamp from the object
+    const timestampString = timestamp.toString(); 
+    console.log(timestampString)
+    axios.get(`http://localhost:8080/likes/matches?userId=${timestampString}`)
         .then((response) => {
             let data = response.data;
             setMatches(data);
