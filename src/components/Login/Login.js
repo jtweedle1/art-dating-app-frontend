@@ -14,6 +14,8 @@ function Login({handleLogin, user}){
         axios.post("http://localhost:8080/users/login", {
             username: event.target.username.value,
             password: event.target.password.value,
+        },{
+            withCredentials: true
         })
             .then((response) => {
                 let data = response.data;
