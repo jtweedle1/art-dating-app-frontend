@@ -14,7 +14,7 @@ import {
 
 function Main({user}){
 const [toSwipe,setToSwipe] = useState(null);
-
+const [currentIndex, setCurrentIndex] = useState(0);
 
     async function handleLike (){
         
@@ -32,7 +32,9 @@ const [toSwipe,setToSwipe] = useState(null);
     //         .catch((error) => {
     //             console.log(error);
     //         });
-
+        getPeople();
+        console.log(user)
+        // console.log(toSwipe)
         console.log("love is in the air")
 
     //     console.log(user)
@@ -40,7 +42,7 @@ const [toSwipe,setToSwipe] = useState(null);
 
     async function getPeople () {
         
-        axios.get("http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989", {
+        axios.get(`http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989`, {
     },{
         headers: {
             'Content-Type': 'application/json'

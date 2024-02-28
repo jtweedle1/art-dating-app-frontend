@@ -5,26 +5,43 @@ import { useNavigate} from 'react-router-dom';
 import { FormField, Button, Form } from 'semantic-ui-react'
 
 
-function Login({handleLogin, user}){
+function Login({ handleLogin }) {
     const navigate = useNavigate();
 
-    async function handleSubmit (event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         
-        axios.post("http://localhost:8080/users/login", {
-            username: event.target.username.value,
-            password: event.target.password.value,
-        },{
+        const formData = new FormData();
+        formData.append('username', event.target.username.value);
+        formData.append('password', event.target.password.value);
+
+        axios.post("http://localhost:8080/perform_login", formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
             withCredentials: true
         })
             .then((response) => {
-                let data = response.data;
-                handleLogin(data)
-                navigate('/main');
-                console.log(data.id)
+                console.log("Login is successful", response.data);
+
+                // potentially optional
+                handleLogin(response.data);
+
+                axios.get('http://localhost:8080/users/api/auth/check', { withCredentials: true })
+                    .then(response => {
+                        const isAuthenticated = response.data;
+                        if (isAuthenticated) {
+                            console.log("User is authenticated");
+                            navigate('/main');
+                        } else {
+                            console.log("User is not authenticated");
+                        }
+                    })
+                    .catch(error => console.error('Error checking authentication:', error));
             })
             .catch((error) => {
-                console.log(error);
+                console.error("Login failed", error);
+                // Handle login failure (e.g., display an error message)
             });
     };
     
