@@ -1,5 +1,6 @@
 import './Main.scss';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import {
     CardMeta,
     CardHeader,
@@ -11,13 +12,50 @@ import {
   } from 'semantic-ui-react'
 
 
-function Main(){
-
+function Main({user}){
+const [toSwipe,setToSwipe] = useState(null);
 
 
     async function handleLike (){
+        
+    //     axios.post("http://localhost:8080/likes", {
+    //         likerId: user.id,
+    //         likeeId: toSwipe.id
+
+    //     },{
+    //         withCredentials: true
+    //     })
+    //         .then((response) => {
+    //             let data = response.data;
+    //             setToSwipe(data)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+
         console.log("love is in the air")
+
+    //     console.log(user)
     }
+
+    async function getPeople () {
+        
+        axios.get("http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989", {
+    },{
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true
+    })
+        .then((response) => {
+            let data = response.data;
+            setToSwipe(data)
+            console.log(data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
 
     return (
         <div className='main'>

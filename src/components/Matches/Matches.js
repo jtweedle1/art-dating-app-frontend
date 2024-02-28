@@ -26,7 +26,7 @@ function Matches({user}){
         const timestamp = user.id.timestamp; // Extract the timestamp from the object
     const timestampString = timestamp.toString(); 
     console.log(timestampString)
-    axios.get(`http://localhost:8080/likes/matches?userId=${timestampString}`)
+    axios.get(`http://localhost:8080/likes/matches?userId=65df6cad153d9d1bf6d95989`)
         .then((response) => {
             let data = response.data;
             setMatches(data);

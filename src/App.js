@@ -37,7 +37,7 @@ function App() {
         <Routes>
           <Route path="/"element={<Login handleLogin={handleLogin} user={user}  />}/>
           <Route path="/signup" element={<Signup handleLogin={handleLogin}/>} />
-          <Route path="/main" element={ <Main />}/>
+          <Route path="/main" element={ <Main user={user} />}/>
           <Route path="/matches" element={<Matches user={user} />}/>
           <Route path="/messages" element={<Messages  />} />
           <Route path="/profile" element={<Profile handleLogout={handleLogout} />} />
