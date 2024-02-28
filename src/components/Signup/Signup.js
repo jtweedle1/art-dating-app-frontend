@@ -23,6 +23,8 @@ function Signup(){
             age: age,
             gender: gender,
             bio: formData.get('bio'),
+        }, {
+            withCredentials: true
         })
             .then((response) => {
                 let data = response.data;
