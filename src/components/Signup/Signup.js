@@ -10,31 +10,35 @@ function Signup(){
     async function handleSubmit (event) {
         event.preventDefault();
 
-        const formData = new FormData(event.target);
-        const gender = formData.get('gender');
-        const age = parseInt(formData.get('age')); 
+        // Assuming age, name, username, etc. are correctly gathered from the form
+        const age = parseInt(event.target.age.value); // Convert age to an integer
 
-        
-        axios.post("http://localhost:8080/users", {
-            name: formData.get('name'),
-            username: formData.get('username'),
-            password: formData.get('password'),
-            art: formData.get('art'),
+        // Construct the payload as a JSON object
+        const payload = {
             age: age,
-            gender: gender,
-            bio: formData.get('bio'),
-        }, {
+            name: event.target.name.value,
+            username: event.target.username.value,
+            password: event.target.password.value,
+            art: event.target.art.value,
+            gender: "Nonbinary",
+            bio: event.target.bio.value,
+            roles: ['ROLE_USER'] // Adjust based on your roles setup; ensure it's an array
+        };
+
+        axios.post("http://localhost:8080/users", payload, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
             withCredentials: true
         })
             .then((response) => {
-                let data = response.data;
-                navigate('/')
-                console.log(data)
+                navigate('/'); // Adjust as needed, e.g., to a login page or main area
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
-    };
+    }
 
     const options = [
         { key: 'f', text: 'Female', value: 'female' },
