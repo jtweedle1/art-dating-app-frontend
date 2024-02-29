@@ -17,24 +17,25 @@ const [toSwipe,setToSwipe] = useState(null);
 const [currentIndex, setCurrentIndex] = useState(0);
 
     async function handleLike (){
-        
-    //     axios.post("http://localhost:8080/likes", {
-    //         likerId: user.id,
-    //         likeeId: toSwipe.idg
+        // console.log(toSwipe[currentIndex].id)
+        axios.post("http://localhost:8080/likes", {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            likerId: "65df6cad153d9d1bf6d95989",
+            likeeId: toSwipe[currentIndex].id
 
-    //     },{
-    //         withCredentials: true
-    //     })
-    //         .then((response) => {
-    //             let data = response.data;
-    //             setToSwipe(data)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-        getPeople();
-        console.log(user)
-        // console.log(toSwipe)
+        },{
+            withCredentials: true
+        })
+            .then((response) => {
+                let data = response.data;
+                console.log(data)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         console.log("love is in the air")
         if (currentIndex < toSwipe.length - 1) {
             setCurrentIndex(prevIndex => prevIndex + 1);
@@ -68,7 +69,6 @@ const [currentIndex, setCurrentIndex] = useState(0);
         .then((response) => {
             let data = response.data;
             setToSwipe(data)
-            console.log(data)
         })
         .catch((error) => {
             console.log(error);
