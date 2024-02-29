@@ -12,7 +12,7 @@ import {
   } from 'semantic-ui-react'
 
 
-function Main({user}){
+function Main({user,matches,setMatches}){
 const [toSwipe,setToSwipe] = useState(null);
 const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -22,8 +22,8 @@ const [currentIndex, setCurrentIndex] = useState(0);
             headers: {
                 'Content-Type': 'application/json',
             },
-            likerId: "65df6cad153d9d1bf6d95989",
-            likeeId: toSwipe[currentIndex].id
+            likerId: user.stringId,
+            likeeId: toSwipe[currentIndex].stringId
 
         },{
             withCredentials: true
@@ -58,8 +58,8 @@ const [currentIndex, setCurrentIndex] = useState(0);
     }, []);
 
     async function getPeople () {
-        
-        axios.get(`http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989`, {
+        // if(user !==null){
+        axios.get(`http://localhost:8080/users/main?userId=${user.stringId}`, {
     },{
         headers: {
             'Content-Type': 'application/json'
@@ -73,6 +73,8 @@ const [currentIndex, setCurrentIndex] = useState(0);
         .catch((error) => {
             console.log(error);
         });
+
+    // }
     };
 
     const handleNext = () => {
@@ -83,6 +85,19 @@ const [currentIndex, setCurrentIndex] = useState(0);
         setCurrentIndex(prevIndex => prevIndex - 1);
     };
 
+    useEffect(() => {
+ 
+        axios.get(`http://localhost:8080/likes/matches?userId=${user.stringId}`)
+            .then((response) => {
+                let data = response.data;
+                setMatches(data);
+                console.log(matches)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        
+        }, []);
     return (
         <div className='main'>
             <div>Art for your heart</div>
