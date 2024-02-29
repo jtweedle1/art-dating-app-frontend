@@ -10,7 +10,7 @@ function Login({ handleLogin }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('username', event.target.username.value);
         formData.append('password', event.target.password.value);
@@ -26,6 +26,15 @@ function Login({ handleLogin }) {
 
                 // potentially optional
                 handleLogin(response.data);
+
+                //save the user data to local storage
+                localStorage.setItem('user', JSON.stringify(response.data));
+
+                //code to retrieve user data from local storage
+                // const user = JSON.parse(localStorage.getItem('user'));
+                // if (user) {
+                //     console.log(user.userId); // Or however the userId is named in your user object
+                // }
 
                 axios.get('http://localhost:8080/users/api/auth/check', { withCredentials: true })
                     .then(response => {
