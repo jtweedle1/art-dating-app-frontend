@@ -23,6 +23,7 @@ function Signup(){
         for (const file of event.target.artPhotos.files) {
             formData.append('artPhotos', file);
         }
+        formData.append('interests', event.target.interests.value);
         formData.append('roles', JSON.stringify(['ROLE_USER']));
 
         axios.post("http://localhost:8080/users", formData, {
@@ -74,14 +75,14 @@ function Signup(){
                     <label>Location</label>
                     <input placeholder='Location' type="text" name="location" />
                 </FormField>
-                <FormSelect
-                    fluid
-                    label='Gender'
-                    options={options}
-                    placeholder='Gender'
-                    name="gender"
-                />
-                <FormTextArea label='Bio' placeholder='Tell us more about you...' name="bio" />
+                <FormField>
+                    <label>Gender</label>
+                    <input placeholder='Gender' type="text" name="gender" />
+                </FormField>
+                <FormField>
+                    <label>Bio (Tell Us About Yourself!)</label>
+                    <input placeholder='Bio' type="text" name="bio" />
+                </FormField>
                 <FormField>
                     <label>Profile Photo</label>
                     <input type="file" name="realPhoto" accept="image/*" />
@@ -89,6 +90,10 @@ function Signup(){
                 <FormField>
                     <label>Art Photos</label>
                     <input type="file" name="artPhotos" accept="image/*" multiple />
+                </FormField>
+                <FormField>
+                    <label>Interests</label>
+                    <input placeholder='Interests' type="text" name="interests"  />
                 </FormField>
                 <FormCheckbox label='I agree to the Terms and Conditions' />
                 <Button type='submit'>Signup</Button>
