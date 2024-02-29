@@ -17,7 +17,7 @@ const [toSwipe,setToSwipe] = useState(null);
 const [currentIndex, setCurrentIndex] = useState(0);
 
     async function handleLike (){
-        // console.log(toSwipe[currentIndex].id)
+        console.log(toSwipe[currentIndex].id)
         axios.post("http://localhost:8080/likes", {
             headers: {
                 'Content-Type': 'application/json',
@@ -53,27 +53,27 @@ const [currentIndex, setCurrentIndex] = useState(0);
     };
 
     //code to implement swiping
-    // useEffect(() => {
-    //     getPeople();
-    // }, []);
+    useEffect(() => {
+        getPeople();
+    }, []);
 
-    // async function getPeople () {
+    async function getPeople () {
         
-    //     axios.get(`http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989`, {
-    // },{
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     withCredentials: true
-    // })
-    //     .then((response) => {
-    //         let data = response.data;
-    //         setToSwipe(data)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    // };
+        axios.get(`http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989`, {
+    },{
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true
+    })
+        .then((response) => {
+            let data = response.data;
+            setToSwipe(data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
 
     const handleNext = () => {
         setCurrentIndex(prevIndex => prevIndex + 1);
