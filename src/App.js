@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.scss';
+import axios from 'axios';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Main from './components/Main/Main';
@@ -12,7 +13,27 @@ import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   const [user, setUser] = useState(null);
-  const [matched,setMatched] = useState(null);
+  const [matches,setMatches] = useState(null);
+
+  useEffect(() => {
+    // const timestamp = user.id.timestamp; // Extract the timestamp from the object
+    // const timestampSeconds = Math.floor(timestamp / 1000); // Convert timestamp to seconds
+    // const objectId = ObjectId.createFromTime(timestampSeconds); // Create ObjectId from timestamp
+    // const objectIdString = objectId.toHexString(); // Convert ObjectId to string
+//     const timestamp = user.id.timestamp; // Extract the timestamp from the object
+// const timestampString = timestamp.toString(); 
+// console.log(timestampString)
+axios.get(`http://localhost:8080/likes/matches?userId=65df6cad153d9d1bf6d95989`)
+    .then((response) => {
+        let data = response.data;
+        setMatches(data);
+        console.log(matches)
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+}, []);
 
   const handleLogout = () => {
     setUser(null);
@@ -37,9 +58,9 @@ function App() {
         <Routes>
           <Route path="/"element={<Login handleLogin={handleLogin} user={user}  />}/>
           <Route path="/signup" element={<Signup handleLogin={handleLogin}/>} />
-          <Route path="/main" element={ <Main user={user} />}/>
-          <Route path="/matches" element={<Matches user={user} />}/>
-          <Route path="/messages" element={<Messages  />} />
+          <Route path="/main" element={ <Main user={user} matches={matches} setMatches={setMatches}/>}/>
+          <Route path="/matches" element={<Matches user={user} matches={matches} setMatches={setMatches}/>}/>
+          <Route path="/messages" element={<Messages matches={matches} />} />
           <Route path="/profile" element={<Profile handleLogout={handleLogout} />} />
         </Routes>
       </BrowserRouter>
