@@ -20,7 +20,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
         
     //     axios.post("http://localhost:8080/likes", {
     //         likerId: user.id,
-    //         likeeId: toSwipe.id
+    //         likeeId: toSwipe.idg
 
     //     },{
     //         withCredentials: true
@@ -36,9 +36,25 @@ const [currentIndex, setCurrentIndex] = useState(0);
         console.log(user)
         // console.log(toSwipe)
         console.log("love is in the air")
-
-    //     console.log(user)
+        if (currentIndex < toSwipe.length - 1) {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        }else {
+            setCurrentIndex(0); // Reset to the beginning of the array
+        }
     }
+    
+    const handleDislike = () => {
+        if (currentIndex < toSwipe.length - 1) {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        }else {
+            setCurrentIndex(0); // Reset to the beginning of the array
+        }
+    };
+
+    //code to implement swiping
+    useEffect(() => {
+        getPeople();
+    }, []);
 
     async function getPeople () {
         
@@ -59,35 +75,46 @@ const [currentIndex, setCurrentIndex] = useState(0);
         });
     };
 
+    const handleNext = () => {
+        setCurrentIndex(prevIndex => prevIndex + 1);
+    };
+
+    const handlePrevious = () => {
+        setCurrentIndex(prevIndex => prevIndex - 1);
+    };
+
     return (
         <div className='main'>
             <div>Art for your heart</div>
-            <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
-                <CardContent>
-                <CardHeader>Matthew</CardHeader>
-                <CardMeta>
-                    <span className='date'>Joined in 2015</span>
-                </CardMeta>
-                <CardDescription>
-                    Matthew is a musician living in Nashville.
-                </CardDescription>
-                </CardContent>
-                <CardContent extra>
-                <a>
-                    <Icon name='user' />
-                    22 Friends
-                </a>
-                </CardContent>
-            </Card>
+        {toSwipe && toSwipe.length > 0 && (
+                <Card>
+                    <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+                    <CardContent>
+                        <CardHeader>{toSwipe[currentIndex].name}</CardHeader>
+                        <CardMeta>
+                            <span className='date'>Joined in 2015</span>
+                        </CardMeta>
+                        <CardDescription>
+                            {toSwipe[currentIndex].bio}
+                        </CardDescription>
+                    </CardContent>
+                    <CardContent extra>
+                        <a>
+                            <Icon name='user' />
+                            22 Friends
+                        </a>
+                    </CardContent>
+                </Card>
+            )}
             <div className='button-container'>
-            <button className='button-dislike'>
+            <button className='button-dislike'onClick={handleDislike}>
                 <span class="material-symbols-outlined">close</span>
             </button>
             <button className='button-like' onClick={handleLike}>
                 <span class="material-symbols-outlined">favorite</span>
             </button>
             </div>
+
         </div>
     );
 }
