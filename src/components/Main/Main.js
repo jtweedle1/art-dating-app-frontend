@@ -1,5 +1,6 @@
 import './Main.scss';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import {
     CardMeta,
     CardHeader,
@@ -11,43 +12,109 @@ import {
   } from 'semantic-ui-react'
 
 
-function Main(){
-
-
+function Main({user}){
+const [toSwipe,setToSwipe] = useState(null);
+const [currentIndex, setCurrentIndex] = useState(0);
 
     async function handleLike (){
+        console.log(toSwipe[currentIndex].id)
+        axios.post("http://localhost:8080/likes", {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            likerId: "65df6cad153d9d1bf6d95989",
+            likeeId: toSwipe[currentIndex].id
+
+        },{
+            withCredentials: true
+        })
+            .then((response) => {
+                let data = response.data;
+                console.log(data)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         console.log("love is in the air")
+        if (currentIndex < toSwipe.length - 1) {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        }else {
+            setCurrentIndex(0); // Reset to the beginning of the array
+        }
     }
+    
+    const handleDislike = () => {
+        if (currentIndex < toSwipe.length - 1) {
+            setCurrentIndex(prevIndex => prevIndex + 1);
+        }else {
+            setCurrentIndex(0); // Reset to the beginning of the array
+        }
+    };
+
+    //code to implement swiping
+    useEffect(() => {
+        getPeople();
+    }, []);
+
+    async function getPeople () {
+        
+        axios.get(`http://localhost:8080/users/main?userId=65df6cad153d9d1bf6d95989`, {
+    },{
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        withCredentials: true
+    })
+        .then((response) => {
+            let data = response.data;
+            setToSwipe(data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
+    const handleNext = () => {
+        setCurrentIndex(prevIndex => prevIndex + 1);
+    };
+
+    const handlePrevious = () => {
+        setCurrentIndex(prevIndex => prevIndex - 1);
+    };
 
     return (
         <div className='main'>
             <div>Art for your heart</div>
-            <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
-                <CardContent>
-                <CardHeader>Matthew</CardHeader>
-                <CardMeta>
-                    <span className='date'>Joined in 2015</span>
-                </CardMeta>
-                <CardDescription>
-                    Matthew is a musician living in Nashville.
-                </CardDescription>
-                </CardContent>
-                <CardContent extra>
-                <a>
-                    <Icon name='user' />
-                    22 Friends
-                </a>
-                </CardContent>
-            </Card>
+        {toSwipe && toSwipe.length > 0 && (
+                <Card>
+                    <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+                    <CardContent>
+                        <CardHeader>{toSwipe[currentIndex].name}</CardHeader>
+                        <CardMeta>
+                            <span className='date'>Joined in 2015</span>
+                        </CardMeta>
+                        <CardDescription>
+                            {toSwipe[currentIndex].bio}
+                        </CardDescription>
+                    </CardContent>
+                    <CardContent extra>
+                        <a>
+                            <Icon name='user' />
+                            22 Friends
+                        </a>
+                    </CardContent>
+                </Card>
+            )}
             <div className='button-container'>
-            <button className='button-dislike'>
+            <button className='button-dislike'onClick={handleDislike}>
                 <span class="material-symbols-outlined">close</span>
             </button>
             <button className='button-like' onClick={handleLike}>
                 <span class="material-symbols-outlined">favorite</span>
             </button>
             </div>
+
         </div>
     );
 }

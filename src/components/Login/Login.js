@@ -24,17 +24,19 @@ function Login({ handleLogin }) {
             .then((response) => {
                 console.log("Login is successful", response.data);
 
+                console.log(response.data)
                 // potentially optional
                 handleLogin(response.data);
 
                 //save the user data to local storage
                 localStorage.setItem('user', JSON.stringify(response.data));
 
-                //code to retrieve user data from local storage
-                // const user = JSON.parse(localStorage.getItem('user'));
-                // if (user) {
-                //     console.log(user.userId); // Or however the userId is named in your user object
-                // }
+                // code to retrieve user data from local storage
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    console.log(user.userId); // Or however the userId is named in your user object
+                }
+                console.log(user)
 
                 axios.get('http://localhost:8080/users/api/auth/check', { withCredentials: true })
                     .then(response => {

@@ -12,24 +12,31 @@ import {
     GridColumn, 
     Grid,
   } from 'semantic-ui-react'
-  
+//   const { ObjectId } = require('mongodb');
 
 
-function Matches(){
-    const [matches, setMatches] = useState(null)
+function Matches({user, setMatches, matches}){
+    // const [matches, setMatches] = useState(null)
 
-    useEffect(() => {
-    axios.get("http://localhost:8080/users")
-        .then((response) => {
-            let data = response.data;
-            setMatches(data);
-            console.log(matches)
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+//     useEffect(() => {
+//         // const timestamp = user.id.timestamp; // Extract the timestamp from the object
+//         // const timestampSeconds = Math.floor(timestamp / 1000); // Convert timestamp to seconds
+//         // const objectId = ObjectId.createFromTime(timestampSeconds); // Create ObjectId from timestamp
+//         // const objectIdString = objectId.toHexString(); // Convert ObjectId to string
+//     //     const timestamp = user.id.timestamp; // Extract the timestamp from the object
+//     // const timestampString = timestamp.toString(); 
+//     // console.log(timestampString)
+//     axios.get(`http://localhost:8080/likes/matches?userId=65df6cad153d9d1bf6d95989`)
+//         .then((response) => {
+//             let data = response.data;
+//             setMatches(data);
+//             console.log(matches)
+//         })
+//         .catch((error) => {
+//             console.log(error);
+//         });
 
-}, []);
+// }, []);
 
     return (
         <div className='matches'>
