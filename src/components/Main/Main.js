@@ -30,6 +30,7 @@ const [liked, setLiked] = useState(false); // State to track if liked
         })
             .then((response) => {
                 let data = response.data;
+                setLiked(true)
                 console.log(data)
             })
             .catch((error) => {
