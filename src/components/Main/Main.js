@@ -15,9 +15,9 @@ import {
 function Main({user,matches,setMatches}){
 const [toSwipe,setToSwipe] = useState(null);
 const [currentIndex, setCurrentIndex] = useState(0);
+const [liked, setLiked] = useState(false); // State to track if liked
 
     async function handleLike (){
-        console.log(toSwipe[currentIndex].id)
         axios.post("http://localhost:8080/likes", {
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,6 @@ const [currentIndex, setCurrentIndex] = useState(0);
     }, []);
 
     async function getPeople () {
-        // if(user !==null){
         axios.get(`http://localhost:8080/users/main?userId=${user.stringId}`, {
     },{
         headers: {
@@ -74,7 +73,7 @@ const [currentIndex, setCurrentIndex] = useState(0);
             console.log(error);
         });
 
-    // }
+
     };
 
     const handleNext = () => {
@@ -91,19 +90,35 @@ const [currentIndex, setCurrentIndex] = useState(0);
             .then((response) => {
                 let data = response.data;
                 setMatches(data);
-                console.log(matches)
             })
             .catch((error) => {
                 console.log(error);
             });
         
         }, []);
+
+        useEffect(() => {
+            // Fetch matches again if liked state changes
+            if (liked) {
+                axios
+                    .get(`http://localhost:8080/likes/matches?userId=${user.stringId}`)
+                    .then((response) => {
+                        let data = response.data;
+                        setMatches(data);
+                        console.log('Yay');
+                        setLiked(false); // Reset liked state after fetching matches
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        }, [liked]); 
     return (
         <div className='main'>
             <div>Art for your heart</div>
         {toSwipe && toSwipe.length > 0 && (
                 <Card>
-                    <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+                    <Image src={toSwipe[currentIndex].artPhotos !== null? toSwipe[currentIndex].artPhotos[0] :'https://react.semantic-ui.com/images/avatar/large/matthew.png'} wrapped ui={false} />
                     <CardContent>
                         <CardHeader>{toSwipe[currentIndex].name}</CardHeader>
                         <CardMeta>

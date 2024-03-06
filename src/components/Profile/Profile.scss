@@ -5,3 +5,28 @@
     height: 100vh;
  
 }
+
+.button{
+    &-like{
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-color: pink;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        position: relative;
+        top:100px;
+        right:200px;
+        margin-left: 1rem;
+        &:hover {
+            background-color: rgb(245,243,243,0.9);
+        }
+        &:active{
+            background-color: rgba(255, 136, 136, 0.9);
+            color: pink;
+        }
+    }
+}
