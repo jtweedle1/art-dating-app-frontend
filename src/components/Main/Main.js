@@ -98,25 +98,28 @@ const [liked, setLiked] = useState(false); // State to track if liked
         
         }, []);
 
-        useEffect(() => {
-            // Fetch matches again if liked state changes
-            if (liked) {
-                axios
-                    .get(`http://localhost:8080/likes/matches?userId=${user.stringId}`)
-                    .then((response) => {
-                        let data = response.data;
-                        setMatches(data);
-                        console.log('Yay');
-                        setLiked(false); // Reset liked state after fetching matches
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            }
-        }, [liked]); 
+    useEffect(() => {
+        // Fetch matches again if liked state changes
+        if (liked) {
+            axios
+                .get(`http://localhost:8080/likes/matches?userId=${user.stringId}`)
+                .then((response) => {
+                    let data = response.data;
+                    setMatches(data);
+                    console.log('Yay');
+                    setLiked(false); // Reset liked state after fetching matches
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [liked]); 
     return (
         <div className='main'>
-            <div>Art for your heart</div>
+            <div className="title-flex">
+            <h1>Art for your heart</h1>
+            </div>
+            <div className='main-card-flex'>
         {toSwipe && toSwipe.length > 0 && (
                 <Card>
                     <Image src={toSwipe[currentIndex].artPhotos !== null? toSwipe[currentIndex].artPhotos[0] :'https://react.semantic-ui.com/images/avatar/large/matthew.png'} wrapped ui={false} />
@@ -132,7 +135,7 @@ const [liked, setLiked] = useState(false); // State to track if liked
                     <CardContent extra>
                         <a>
                             <Icon name='user' />
-                            22 Friends
+                            {toSwipe[currentIndex].location}
                         </a>
                     </CardContent>
                 </Card>
@@ -144,6 +147,7 @@ const [liked, setLiked] = useState(false); // State to track if liked
             <button className='button-like' onClick={handleLike}>
                 <span class="material-symbols-outlined">favorite</span>
             </button>
+            </div>
             </div>
 
         </div>

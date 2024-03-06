@@ -15,7 +15,8 @@ import {
 function Profile({user, handleLogout}){
     return (
         <div className='profile'>
-            <p>My Profile</p>
+            <div className="title-flex">
+            <h2>My Profile</h2></div>
             <Card>
                 <Image src={user.realPhoto} wrapped ui={false} />
                 <CardContent>

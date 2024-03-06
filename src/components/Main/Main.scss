@@ -1,10 +1,18 @@
 .main{
-    display: flex;
     background-image: url('../../assets/paint1.svg'); 
     background-size: cover;
     background-position: center; 
+    &-card-flex{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
-
+.title-flex{
+    display: flex;
+    justify-content: center;
+}
 .button{
     &-dislike{
         color: white;
@@ -17,8 +25,6 @@
         background-color: rgba(0, 0, 0, 0.2);
         padding: 1rem;
         position: relative;
-        top:450px;
-        right:200px;
         &:hover {
           background-color: rgb(245,243,243,0.9);
         }
@@ -38,8 +44,6 @@
         background-color: rgba(0, 0, 0, 0.2);
         padding: 1rem;
         position: relative;
-        top:450px;
-        right:200px;
         margin-left: 1rem;
         &:hover {
             background-color: rgb(245,243,243,0.9);
