@@ -18,6 +18,7 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
+    return <Navigate to="/" replace />;
   };
 
   const handleLogin=(user)=>{

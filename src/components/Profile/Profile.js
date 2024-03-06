@@ -33,9 +33,9 @@ function Profile({user, handleLogout}){
                     {user.location}
                 </a>
                 </CardContent>       
-                <button className='button-like' onClick={handleLogout}><span class="material-symbols-outlined">
+                {/* <button className='button-logout' onClick={handleLogout}><span class="material-symbols-outlined">
 logout
-</span></button>     
+</span></button>      */}
             </Card>
         </div>
     );
