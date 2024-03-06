@@ -18,6 +18,7 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
+    return <Navigate to="/" replace />;
   };
 
   const handleLogin=(user)=>{
@@ -42,7 +43,7 @@ function App() {
           <Route path="/main" element={ <Main user={user} matches={matches} setMatches={setMatches}/>}/>
           <Route path="/matches" element={<Matches user={user} matches={matches} setMatches={setMatches}/>}/>
           <Route path="/messages" element={<Messages matches={matches} />} />
-          <Route path="/profile" element={<Profile handleLogout={handleLogout} />} />
+          <Route path="/profile" element={<Profile handleLogout={handleLogout} user={user} />} />
         </Routes>
       </BrowserRouter>
     </div>

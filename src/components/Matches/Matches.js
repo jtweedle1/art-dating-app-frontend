@@ -28,7 +28,7 @@ function Matches({user, setMatches, matches}){
                     //to format how many cards at width
                     <GridColumn key={index} mobile={8} tablet={4} computer={2}>
             <Card>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+                <Image src={person.artPhotos !== null? person.artPhotos[0] :'https://react.semantic-ui.com/images/avatar/large/matthew.png'} wrapped ui={false} />
                 <CardContent>
                 <CardHeader key={index}>{person.name}</CardHeader>
                 <CardMeta>
