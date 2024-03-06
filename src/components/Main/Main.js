@@ -118,8 +118,11 @@ function Main({user, matches, setMatches}) {
     }, [liked]);
     return (
         <div className='main'>
-            <div>Art for your heart</div>
-            {toSwipe && toSwipe.length > 0 && (
+            <div className="title-flex">
+            <h1>Art for your heart</h1>
+            </div>
+            <div className='main-card-flex'>
+        {toSwipe && toSwipe.length > 0 && (
                 <Card>
                     <Image
                         src={toSwipe[currentIndex].artPhotos !== null ? toSwipe[currentIndex].artPhotos[0] : 'https://react.semantic-ui.com/images/avatar/large/matthew.png'}
@@ -135,8 +138,8 @@ function Main({user, matches, setMatches}) {
                     </CardContent>
                     <CardContent extra>
                         <a>
-                            <Icon name='user'/>
-                            22 Friends
+                            <Icon name='user' />
+                            {toSwipe[currentIndex].location}
                         </a>
                     </CardContent>
                 </Card>
@@ -148,6 +151,7 @@ function Main({user, matches, setMatches}) {
                 <button className='button-like' onClick={handleLike}>
                     <span class="material-symbols-outlined">favorite</span>
                 </button>
+            </div>
             </div>
 
         </div>

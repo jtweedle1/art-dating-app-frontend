@@ -19,7 +19,9 @@ function Matches({user, setMatches, matches}){
 
     return (
         <div className='matches'>
-            <p>Matches</p>
+            <div className="title-flex">
+            <h2>Matches</h2>
+            </div>
             <Grid>
             {matches?
             <>
